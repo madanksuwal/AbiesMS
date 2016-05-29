@@ -1,0 +1,5 @@
+code,lat,long,age,year,type,elev1,from.treeline
+T05,27.898275,86.375575,153,1859,tree,3938,below
+T02,27.898216,86.375529,90,1922,tree,3943,above
+T01,27.898168,86.375455,29,1983,tree,3951,above
+SP01,27.897815,86.374975,22,1990,sapling,4001,above
