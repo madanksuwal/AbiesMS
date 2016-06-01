@@ -1,0 +1,114 @@
+setwd ("/Users/madanksuwal/Documents/Bio302/AbiesMS/DataFiles")
+#### Figure 2. shift after 1900 ####
+library(ggplot2)
+           
+mca1.df<-read.csv('mca1.csv', header=T, sep=',')
+head(mca1.df)
+climb.mca1<-read.table('climb mca1.csv',header=T,sep=',')
+#### MCA1 plot ####
+
+p1<- ggplot(climb.mca1, aes(year, elev1), xlim=c(1900, 2012))+
+  scale_x_continuous(limits = c(1900, 2012))+
+  scale_y_continuous(limits = c(3600, 4020))+
+  geom_line(aes (year, elev1), climb.mca1, show.legend = FALSE)+
+  geom_point(data=mca1.df,aes( year, elev, group=type, shape=as.factor(type)))+
+  labs(x="Year", y="Elevation")+
+  scale_shape_manual(values=c("SD"=3,"SP"=1,"T"=4)) +
+  theme(legend.position = c(0.07, 0.88), legend.title=element_blank() )
+print(p1)
+
+#### MCA -2  plot ####
+mca2.df<-read.csv('mca2.csv', header=T, sep=',')
+mca2.df<- na.omit(mca2.df)
+climb.mca2<-read.csv('climb mca2.csv',header=T,sep=',')
+climb.mca2<- na.omit(climb.mca2)
+p2<- ggplot(climb.mca2, aes(year, elev1))+
+  geom_line(aes (year, elev1), climb.mca2, show.legend = FALSE)+
+  geom_point(data=mca2.df,aes( year, elev, group=type, shape=as.factor(type)))+
+  coord_cartesian(xlim=c(1900, 2012))+
+  coord_cartesian(ylim=c(3600,4020)) +
+  labs(x="Year", y="Elevation")+
+  scale_shape_manual(values=c("seedling"=3,"sapling"=1,"tree"=4)) +
+  theme(legend.position="none")
+  #theme(legend.position = c(0.07, 0.85), legend.title=element_blank() )
+print(p2)
+
+#### MCA -3  plot ####
+mca3.df<-read.csv('mca3.csv', header=T, sep=',')
+mca3.df<-na.omit(mca3.df)
+climb.mca3<-read.csv('climb mca3.csv',header=T,sep=',')
+climb.mca3<-na.omit(climb.mca3)
+p3<- ggplot(climb.mca3, aes(year, elev1))+
+  geom_line(aes (year, elev1), climb.mca3, show.legend = FALSE)+
+  geom_point(data=mca3.df,aes( year, elev, group=type, shape=as.factor(type)))+
+  coord_cartesian(xlim=c(1900, 2012))+
+  coord_cartesian(ylim=c(3600,4020)) +
+  labs(x="Year", y="Elevation")+
+  scale_shape_manual(values=c("seedling"=3,"sapling"=1,"tree"=4)) +
+  theme(legend.position="none")
+  #theme(legend.position = c(0.07, 0.85), legend.title=element_blank() )
+print(p3)
+
+#### GCA -1 plot ####
+gca1.df<-read.csv('gca1.csv', header=T, sep=',')
+climb.gca1<-read.csv('climb gca1.csv',header=T,sep=',')
+p4<- ggplot(climb.gca1, aes(year, elev1))+
+  geom_line(aes (year, elev1), climb.gca1, show.legend = FALSE)+
+  geom_point(data=gca1.df,aes( year, elev, group=type, shape=as.factor(type)))+
+  coord_cartesian(xlim=c(1900, 2012))+
+  coord_cartesian(ylim=c(3600,4020)) +
+  labs(x="Year", y="Elevation")+
+  scale_shape_manual(values=c("seedling"=3,"sapling"=1,"tree"=4)) +
+  theme(legend.position="none")
+  #theme(legend.position = c(0.07, 0.85), legend.title=element_blank() )
+print(p4)
+
+multiplot(p1, p2, p3, p4, cols=2)
+
+
+### multiplot function 
+# Multiple plot function
+#
+# ggplot objects can be passed in ..., or to plotlist (as a list of ggplot objects)
+# - cols:   Number of columns in layout
+# - layout: A matrix specifying the layout. If present, 'cols' is ignored.
+#
+# If the layout is something like matrix(c(1,2,3,3), nrow=2, byrow=TRUE),
+# then plot 1 will go in the upper left, 2 will go in the upper right, and
+# 3 will go all the way across the bottom.
+#
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  library(grid)
+  
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+  
+  numPlots = length(plots)
+  
+  # If layout is NULL, then use 'cols' to determine layout
+  if (is.null(layout)) {
+    # Make the panel
+    # ncol: Number of columns of plots
+    # nrow: Number of rows needed, calculated from # of cols
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                     ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+  
+  if (numPlots==1) {
+    print(plots[[1]])
+    
+  } else {
+    # Set up the page
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+    
+    # Make each plot, in the correct location
+    for (i in 1:numPlots) {
+      # Get the i,j matrix positions of the regions that contain this subplot
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+      
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}
