@@ -1,14 +1,16 @@
 ---
-title: "abies"
+title: "Abies shiting plots"
 output: html_document
 ---
 
+#Setting Working directory
 ```{r}
 setwd ("/Users/madanksuwal/Documents/Bio302/AbiesMS/DataFiles")
 #Figure 2. shift after 1900
 library(ggplot2)
 ```
 
+#Data import and plot defining 
 ```{r}
 mca1.df<-read.csv('mca1.csv', header=T, sep=',')
 head(mca1.df)
@@ -77,6 +79,7 @@ p4<- ggplot(climb.gca1, aes(year, elev1))+
 #print(p4)
 ```
 
+# Creating Multiplot function (source Cook's book page)
 ```{r}
 ### multiplot function 
 # Multiple plot function
@@ -126,14 +129,7 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
 }
 ```
 
-
+#Making multiplot with ggplot
 ```{r}
 multiplot(p1, p2, p3, p4, cols=2)
 ```
-
-
-
-
-
-
-
