@@ -24,7 +24,7 @@ p1<- ggplot(climb.mca1, aes(year, elev1), xlim=c(1900, 2012))+
   labs(x="Year", y="Elevation")+
   scale_shape_manual(values=c("SD"=3,"SP"=1,"T"=4)) +
   theme(legend.position = c(0.07, 0.88), legend.title=element_blank() )
-print(p1)
+#print(p1)
 ```
 
 ```{r}
@@ -42,7 +42,7 @@ p2<- ggplot(climb.mca2, aes(year, elev1))+
   scale_shape_manual(values=c("seedling"=3,"sapling"=1,"tree"=4)) +
   theme(legend.position="none")
   #theme(legend.position = c(0.07, 0.85), legend.title=element_blank() )
-print(p2)
+#print(p2)
 ```
 
 ```{r}
@@ -60,7 +60,7 @@ p3<- ggplot(climb.mca3, aes(year, elev1))+
   scale_shape_manual(values=c("seedling"=3,"sapling"=1,"tree"=4)) +
   theme(legend.position="none")
   #theme(legend.position = c(0.07, 0.85), legend.title=element_blank() )
-print(p3)
+#print(p3)
 ```
 
 ```{r}
@@ -76,7 +76,7 @@ p4<- ggplot(climb.gca1, aes(year, elev1))+
   scale_shape_manual(values=c("seedling"=3,"sapling"=1,"tree"=4)) +
   theme(legend.position="none")
   #theme(legend.position = c(0.07, 0.85), legend.title=element_blank() )
-print(p4)
+#print(p4)
 ```
 
 ```{r}
